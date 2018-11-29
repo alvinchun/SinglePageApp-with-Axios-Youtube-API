@@ -1,0 +1,5 @@
+{
+  "extends": ["react-app", "plugin:prettier/recommended"]
+}
+
+// console.log gets underlined even with no-console option we gave above. It's because when we do create-react-app, the react-scripts package comes along with it. babel webpack
