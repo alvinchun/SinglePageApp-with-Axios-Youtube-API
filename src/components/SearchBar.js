@@ -3,7 +3,7 @@ import React from "react";
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { term: "sadf" };
+    this.state = { term: "buildings" };
   }
 
   onInputChange = event => {
@@ -13,7 +13,7 @@ class SearchBar extends React.Component {
 
   onFormSubmit = event => {
     event.preventDefault();
-    //event.preventDefault();
+    this.props.onFormSubmit(this.state.term);
   };
 
   render() {
