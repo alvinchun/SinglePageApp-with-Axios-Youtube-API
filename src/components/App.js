@@ -2,11 +2,10 @@ import React from "react";
 import SearchBar from "./SearchBar";
 import youtube from "../apis/youtube";
 import VideoList from "./VideoList";
-
-// import VideoDetail from "./VideoDetail";
+import VideoDetail from "./VideoDetail";
 
 class App extends React.Component {
-  state = { videos: [] };
+  state = { videos: [], selectedVideo: null };
 
   onTermSubmit = async term => {
     const response = await youtube.get("/search", {
@@ -20,6 +19,12 @@ class App extends React.Component {
     this.setState({ videos: response.data.items });
   };
 
+  onVideoSelect = video => {
+    console.log("From the App!", video);
+    //console logging to show logging on console by syaing "From the App!" and show the information of that one specific video
+    this.setState({ selectedVideo: video });
+  };
+
   // make sure we can get reference to the video of list
   // making api request = async operation = interact with either promises or async/ await syntax (significant easier to write out what is going on)
   //
@@ -30,7 +35,11 @@ class App extends React.Component {
     return (
       <div className="ui container">
         <SearchBar onFormSubmit={this.onTermSubmit} />
-        <VideoList videos={this.state.videos} />
+        <VideoDetail video={this.state.selectedVideo} />
+        <VideoList
+          onVideoSelect={this.onVideoSelect}
+          videos={this.state.videos}
+        />
         {/* <VideoDetail video="" /> */}
         {/* onFormSubmit 으로 props를 주고, submit을 하면 SearchBar.js 에서 onFormSubmit funtion이 받아서 this.state.term 과 같게 value 를 맞추어준다*/}
       </div>
